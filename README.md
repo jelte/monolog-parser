@@ -13,9 +13,10 @@ You can install the library using [composer]('http://getcomposer.org/) by adding
     require_once 'path/to/vendor/autoload.php';
     
     use Dubture\Monolog\Reader\LogReader;
+    use Dubture\Monolog\Parser\LineLogParser;
     
     $logFile = '/path/to/some/monolog.log';
-    $reader = new LogReader($logFile);
+    $reader = new LogReader($logFile, new LineLogParser());
     
     foreach ($reader as $log) {
         echo sprintf("The log entry was written at %s. \n", $log['date']->format('Y-m-d h:i:s'));

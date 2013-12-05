@@ -13,11 +13,13 @@ namespace Dubture\Monolog\Parser;
 
 class LineLogParser implements LogParserInterface
 {
-    protected $pattern;
+    protected $pattern = '/\[(?P<date>.*)\] (?P<logger>\w+).(?P<level>\w+): (?P<message>[^ ]+) (?P<context>[^ ]+) (?P<extra>[^ ]+)/';
 
-    public function __construct($pattern = '/\[(?P<date>.*)\] (?P<logger>\w+).(?P<level>\w+): (?P<message>[^ ]+) (?P<context>[^ ]+) (?P<extra>[^ ]+)/')
+    public function __construct($pattern = null)
     {
-        $this->pattern = $pattern;
+        if ( null !== $pattern ) {
+            $this->pattern = $pattern;
+        }
     }
 
     /**

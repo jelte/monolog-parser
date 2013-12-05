@@ -11,12 +11,13 @@
 
 namespace Dubture\Monolog\Reader;
 
-use Dubture\Monolog\Reader\AbstractReader;
+use Dubture\Monolog\Parser\LineLogParser;
+use Dubture\Monolog\Parser\LogParserInterface;
 
 /**
  * @author Robert Gruendler <r.gruendler@gmail.com>
  */
-class LogReader extends AbstractReader implements \Iterator, \ArrayAccess, \Countable
+class LogReader implements \Iterator, \ArrayAccess, \Countable
 {
     /**
      * @var \SplFileObject
@@ -36,7 +37,7 @@ class LogReader extends AbstractReader implements \Iterator, \ArrayAccess, \Coun
     /**
      * @param string $file
      */
-    public function __construct($file)
+    public function __construct($file, LogParserInterface $parser = null)
     {
         $this->file = new \SplFileObject($file, 'r');
         $i = 0;
@@ -47,7 +48,8 @@ class LogReader extends AbstractReader implements \Iterator, \ArrayAccess, \Coun
         }
 
         $this->lineCount = $i;
-        $this->parser = $this->getDefaultParser();
+        if ( null === $parser ) $parser = new LineLogParser();
+        $this->parser = $parser;
     }
 
     /**

@@ -37,7 +37,7 @@ class LogReader implements \Iterator, \ArrayAccess, \Countable
     /**
      * @param string $file
      */
-    public function __construct($file, LogParserInterface $parser = null)
+    public function __construct($file, LogParserInterface $parser)
     {
         $this->file = new \SplFileObject($file, 'r');
         $i = 0;
@@ -48,7 +48,6 @@ class LogReader implements \Iterator, \ArrayAccess, \Countable
         }
 
         $this->lineCount = $i;
-        if ( null === $parser ) $parser = new LineLogParser();
         $this->parser = $parser;
     }
 

@@ -20,7 +20,7 @@ class LineLogParserTest extends \PHPUnit_Framework_TestCase
 {
     public function testLineFormatter()
     {
-        $parser = new LineLogParser('/\[(?P<date>.*)\] (?P<logger>\w+).(?P<level>\w+): (?P<message>[^ ]+) (?P<context>[^ ]+) (?P<extra>[^ ]+)/');
+        $parser = new LineLogParser();
         $log = $parser->parse('[2013-03-16 14:19:51] test.INFO: foobar {"foo":"bar"} []');
 
         $this->assertInstanceOf('\DateTime', $log['date']);
